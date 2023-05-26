@@ -81,8 +81,8 @@
             event.preventDefault();
 
             // Obter o peso em gramas e o valor em reais por kg
-            let peso_gramas = document.getElementById("peso").value;
-            let preco_kg = document.getElementById("valor").value;
+            let peso_gramas = parseFloat(document.getElementById("peso").value);
+            let preco_kg = parseFloat(document.getElementById("valor").value);
 
             // Converter o preço por kg em reais para o preço por grama em reais
             let preco_grama = preco_kg / 1000;
@@ -98,3 +98,4 @@
 </body>
 
 </html>
+
