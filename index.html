@@ -56,7 +56,7 @@
 </head>
 
 <body>
-    <h1>Cálculo de Preço por Grama v2</h1>
+    <h1>Cálculo de Preço por Grama atualizado</h1>
 
     <form id="form">
         <label for="peso">Peso do produto (em gramas):</label>
@@ -71,30 +71,31 @@
     <div id="resultado" class="resultado"></div>
 
     <script>
-        // Obter o formulário e o campo de resultado
-        let form = document.getElementById("form");
-        let resultado = document.getElementById("resultado");
+    // Obter o formulário e o campo de resultado
+    let form = document.getElementById("form");
+    let resultado = document.getElementById("resultado");
 
-        // Adicionar um evento submit ao formulário
-        form.addEventListener("submit", function(event) {
-            // Prevenir o comportamento padrão do formulário de recarregar a página
-            event.preventDefault();
+    // Adicionar um evento submit ao formulário
+    form.addEventListener("submit", function(event) {
+        // Prevenir o comportamento padrão do formulário de recarregar a página
+        event.preventDefault();
 
-            // Obter o peso em gramas e o valor em reais por kg
-            let peso_gramas = parseFloat(document.getElementById("peso").value);
-            let preco_kg = parseFloat(document.getElementById("valor").value);
+        // Obter o peso em gramas e o valor em reais por kg
+        let peso_gramas = parseFloat(document.getElementById("peso").value);
+        let preco_kg = parseFloat(document.getElementById("valor").value);
 
-            // Converter o preço por kg em reais para o preço por grama em reais
-            let preco_grama = preco_kg / 1000;
+        // Converter o preço por kg em reais para o preço por grama em reais
+        let preco_grama = preco_kg * 0.001;
 
-            // Calcular o preço total em reais para o peso informado em gramas
-            let preco_total = (peso_gramas * preco_grama).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        // Calcular o preço total em reais para o peso informado em gramas
+        let preco_total = (peso_gramas * preco_grama).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-            // Mostrar o resultado na página
-            resultado.innerHTML = "O preço para " + peso_gramas + " gramas é " + preco_total + ".";
-        });
+        // Mostrar o resultado na página
+        resultado.innerHTML = "O preço para " + peso_gramas + " gramas é " + preco_total + ".";
+    });
 
-    </script>
+</script>
+
 </body>
 
 </html>
