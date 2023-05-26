@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema v2</title>
+    <title>Sistema</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,6 +45,11 @@
             font-size: 16px;
             cursor: pointer;
         }
+        
+        span {
+           color: purple;
+           font-size: 15px;
+        }
 
         .resultado {
             margin-top: 50px;
@@ -56,13 +61,13 @@
 </head>
 
 <body>
-    <h1>Cálculo de Preço por Grama atualizado</h1>
+    <h1>Cálculo de Preço por Grama <span>Atualizado</span></h1>
 
     <form id="form">
         <label for="peso">Peso do produto (em gramas):</label>
         <input type="number" id="peso" name="peso" min="1" required>
 
-        <label for="valor">Valor do produto (em reais):</label>
+        <label for="valor">Valor do produto (em reais por kg):</label>
         <input type="text" id="valor" name="valor" required>
 
         <button type="submit">Calcular</button>
@@ -71,32 +76,45 @@
     <div id="resultado" class="resultado"></div>
 
     <script>
-    // Obter o formulário e o campo de resultado
-    let form = document.getElementById("form");
-    let resultado = document.getElementById("resultado");
+        // Obter o formulário e o campo de resultado
+        let form = document.getElementById("form");
+        let resultado = document.getElementById("resultado");
 
-    // Adicionar um evento submit ao formulário
-    form.addEventListener("submit", function(event) {
-        // Prevenir o comportamento padrão do formulário de recarregar a página
-        event.preventDefault();
+        // Adicionar um evento submit ao formulário
+        form.addEventListener("submit", function(event) {
+            // Prevenir o comportamento padrão do formulário de recarregar a página
+            event.preventDefault();
 
-        // Obter o peso em gramas e o valor em reais por kg
-        let peso_gramas = parseFloat(document.getElementById("peso").value);
-        let preco_kg = parseFloat(document.getElementById("valor").value);
+            // Obter o peso em gramas e o valor em reais por kg
+            let peso_gramas = parseFloat(document.getElementById("peso").value);
+            let preco_kg = parseFloat(document.getElementById("valor").value.replace(",", "."));
 
-        // Converter o preço por kg em reais para o preço por grama em reais
-        let preco_grama = preco_kg * 0.001;
+            // Converter o preço por kg em reais para o preço por grama em reais
+            let preco_grama = preco_kg * 0.001;
 
-        // Calcular o preço total em reais para o peso informado em gramas
-        let preco_total = (peso_gramas * preco_grama).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+            // Calcular o preço total em reais para o peso informado em gramas
+            let preco_total = (peso_gramas * preco_grama).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-        // Mostrar o resultado na página
-        resultado.innerHTML = "O preço para " + peso_gramas + " gramas é " + preco_total + ".";
-    });
+            // Mostrar o resultado na página
+            resultado.innerHTML = "O preço para " + peso_gramas + " gramas é " + preco_total + ".";
+        });
 
-</script>
-
+        // Adicionar um manipulador de evento de entrada ao campo "valor" para atualizar automaticamente o valor
+        let valorInput = document.getElementById("valor");
+        valorInput.addEventListener("input", function() {
+            let valor = this.value.replace(",", ".");
+            if (valor.includes(".")) {
+                let parts = valor.split(".");
+                if (parts.length > 2) {
+                    parts = parts.slice(0, 2);
+                }
+                valor = parts.join(".");
+            }
+            this.value = valor;
+        });
+    </script>
 </body>
 
 </html>
+
 
