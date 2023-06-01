@@ -6,215 +6,213 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        input[type="range"] {
-            appearance: none;
-            width: 150px;
-            height: 15px;
-            outline: 0;
-            opacity: 0.7;
-            border-radius: 5px;
-            background: #d3d3d3;
-            margin: 20px;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #4CAF50;
-            cursor: pointer;
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border: none;
-            border-radius: 50%;
-            background: #4CAF50;
-            cursor: pointer;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        span {
-            color: purple;
-            font-weight: 600;
-            font-size: 20px;
-            margin: 10px;
-        }
-
-        .resultado {
-            margin-top: 50px;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        #botoesValores {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            margin-top: 10px;
-            justify-content: space-around;
-            align-items: center;
-            flex-flow: row wrap;
-        }
-
-        .btn-valor1 {
-            background-color: rgb(184, 184, 0);
-            color: black;
-        }
-        .btn-valor2 {
-            background-color: tomato;
-        }
-        .btn-valor3 {
-            background-color: goldenrod;
-        }
-        .btn-valor4 {
-            background-color: brown;
-        }
-        .btn-valor5 {
-            background-color: rgb(255, 0, 13);
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Cálculo de Preço por Grama <span>Atualizado</span></h1>
-
-    <form id="form">
-        <label style="font-weight: 700; color: chocolate;" for="peso">Peso do produto (em gramas):</label>
-        <input type="range" id="peso" name="peso" min="0" max="2500" required>
-        <span id="pesoLabel">0.000 kg</span>
-
-        <label for="valor" style="color: chocolate; margin-bottom: 10px; font-weight: 700;">Valor do produto (em reais
-            por kg):</label>
-        <input autocomplete="off" style="width: 100px; height: 25px;" type="text" id="valor" name="valor">
-
-        <div id="botoesValores">
-            <button class="btn-valor1" data-valor="7.00">Banana R$7.00/kg</button>
-            <button class="btn-valor2" data-valor="6.00">Tomate R$6.00/kg</button>
-            <button class="btn-valor3" data-valor="7.50">Cebola R$7.50/kg</button>
-            <button class="btn-valor4" data-valor="6.00">Batata R$6.00/kg</button>
-            <button class="btn-valor5" data-valor="50.00">Bacon R$50.00/kg</button>
-        </div>
-
-        <button type="submit" style="margin-top: 20px;">Calcular</button>
-    </form>
-
-    <div id="resultado" class="resultado"></div>
-
-    <script>
-        // Obter o formulário e o campo de resultado
-        let form = document.getElementById("form");
-        let resultado = document.getElementById("resultado");
-        let pesoLabel = document.getElementById("pesoLabel");
-
-        // Adicionar um evento submit ao formulário
-        form.addEventListener("submit", function (event) {
-            // Prevenir o comportamento padrão do formulário de recarregar a página
-            event.preventDefault();
-
-            // Obter o peso em gramas e o valor em reais por kg
-            let peso_gramas = parseFloat(document.getElementById("peso").value);
-            let preco_kg = parseFloat(document.getElementById("valor").value.replace(",", "."));
-
-            // Converter o preço por kg em reais para o preço por grama em reais
-            let preco_grama = preco_kg * 0.001;
-
-            // Calcular o preço total em reais para o peso informado em gramas
-            let preco_total = (peso_gramas * preco_grama).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
-            // Mostrar o resultado na página
-            resultado.innerHTML = "O preço para " + peso_gramas + " gramas é " + preco_total + ".";
-        });
-
-        // Adicionar um manipulador de evento de entrada ao campo "valor" para atualizar automaticamente o valor
-        let valorInput = document.getElementById("valor");
-        valorInput.addEventListener("input", function () {
-            let valor = this.value.replace(",", ".");
-            if (valor.includes(".")) {
-                let parts = valor.split(".");
-                if (parts.length > 2) {
-                    parts = parts.slice(0, 2);
+<style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+    
+            h1 {
+                text-align: center;
+                margin-top: 50px;
+            }
+    
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 50px;
+            }
+    
+            input[type="range"] {
+                appearance: none;
+                width: 150px;
+                height: 15px;
+                outline: 0;
+                opacity: 0.7;
+                border-radius: 5px;
+                background: #d3d3d3;
+                margin: 20px;
+            }
+    
+            input[type="range"]::-webkit-slider-thumb {
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+    
+            input[type="range"]::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border: none;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+    
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+    
+            span {
+                color: purple;
+                font-weight: 600;
+                font-size: 20px;
+                margin: 10px;
+            }
+    
+            .resultado {
+                margin-top: 10px;
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+            }
+    
+            #botoesValores {
+                width: 100%;
+                height: 200px;
+                display: flex;
+                margin-top: 10px;
+                justify-content: space-around;
+                align-items: center;
+                flex-flow: row wrap;
+            }
+    
+            .btn-valor1 {
+                background-color: rgb(184, 184, 0);
+                color: black;
+            }
+            .btn-valor2 {
+                background-color: tomato;
+            }
+            .btn-valor3 {
+                background-color: goldenrod;
+            }
+            .btn-valor4 {
+                background-color: brown;
+            }
+            .btn-valor5 {
+                background-color: rgb(255, 0, 13);
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1>Cálculo de Preço por Grama <span>Atualizado</span></h1>
+    
+        <form id="form">
+            <label style="font-weight: 700; color: chocolate;" for="peso">Peso do produto (em gramas):</label>
+            <input type="range" id="peso" name="peso" min="0" max="2500" required>
+            <span id="pesoLabel">0.000 kg</span>
+    
+            <label for="valor" style="color: chocolate; margin-bottom: 10px; font-weight: 700;">Valor do produto (em reais
+                por kg):</label>
+            <input autocomplete="off" style="width: 100px; height: 25px;" type="text" id="valor" name="valor">
+            <div id="resultado" class="resultado"></div>
+            
+            <div id="botoesValores">
+                <button class="btn-valor btn-valor1" data-valor="7.00">Banana R$7.00/kg</button>
+                <button class="btn-valor btn-valor2" data-valor="6.00">Tomate R$6.00/kg</button>
+                <button class="btn-valor btn-valor3" data-valor="7.50">Cebola R$7.50/kg</button>
+                <button class="btn-valor btn-valor4" data-valor="6.00">Batata R$6.00/kg</button>
+                <button class="btn-valor btn-valor5" data-valor="50.00">Bacon R$50.00/kg</button>
+            </div>
+    
+            <button type="submit" style="margin-top: 20px;">Calcular</button>
+        </form>
+    
+    
+        <script>
+            // Obter o formulário e o campo de resultado
+            let form = document.getElementById("form");
+            let resultado = document.getElementById("resultado");
+            let pesoLabel = document.getElementById("pesoLabel");
+    
+            // Adicionar um evento submit ao formulário
+            form.addEventListener("submit", function (event) {
+                // Prevenir o comportamento padrão do formulário de recarregar a página
+                event.preventDefault();
+    
+                // Obter o peso em gramas e o valor em reais por kg
+                let peso_gramas = parseFloat(document.getElementById("peso").value);
+                let preco_kg = parseFloat(document.getElementById("valor").value.replace(",", "."));
+    
+                // Converter o preço por kg em reais para o preço por grama em reais
+                let preco_grama = preco_kg * 0.001;
+    
+                // Calcular o preço total em reais para o peso informado em gramas
+                let preco_total = (peso_gramas * preco_grama).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    
+                // Mostrar o resultado na página
+                resultado.innerHTML = "O preço para " + peso_gramas + " gramas é " + preco_total + ".";
+            });
+    
+            // Adicionar um manipulador de evento de entrada ao campo "valor" para atualizar automaticamente o valor
+            let valorInput = document.getElementById("valor");
+            valorInput.addEventListener("input", function () {
+                let valor = this.value.replace(",", ".");
+                if (valor.includes(".")) {
+                    let parts = valor.split(".");
+                    if (parts.length > 2) {
+                        parts = parts.slice(0, 2);
+                    }
+                    valor = parts.join(".");
                 }
-                valor = parts.join(".");
-            }
-            this.value = valor;
-        });
-
-        // Atualizar o valor exibido do peso em quilogramas
-        let pesoInput = document.getElementById("peso");
-        pesoInput.addEventListener("input", function () {
-            let peso_gramas = parseFloat(this.value);
-            if (isNaN(peso_gramas)) {
-                peso_gramas = 0;
-            }
-            let peso_quilos = peso_gramas / 1000;
-            pesoLabel.innerHTML = peso_quilos.toFixed(3) + " kg";
-        });
-
-        // Adicionar um manipulador de evento de clique ao pesoLabel
-        pesoLabel.addEventListener("click", function () {
-            let valorAtual = parseFloat(pesoInput.value) || 0;
-            pesoLabel.innerHTML = `<input type="text" value="" id="pesoInput" /> kg`;
-            let pesoInputEdit = document.getElementById("pesoInput");
-            pesoInputEdit.focus();
-
-            pesoInputEdit.addEventListener("keypress", function (event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
+                this.value = valor;
+            });
+    
+            // Atualizar o valor exibido do peso em quilogramas
+            let pesoInput = document.getElementById("peso");
+            pesoInput.addEventListener("input", function () {
+                let peso_gramas = parseFloat(this.value);
+                if (isNaN(peso_gramas)) {
+                    peso_gramas = 0;
+                }
+                let peso_quilos = peso_gramas / 1000;
+                pesoLabel.innerHTML = peso_quilos.toFixed(3) + " kg";
+            });
+    
+            // Adicionar um manipulador de evento de clique ao pesoLabel
+            pesoLabel.addEventListener("click", function () {
+                let valorAtual = parseFloat(pesoInput.value) || 0;
+                pesoLabel.innerHTML = `<input type="text" value="" id="pesoInput" /> kg`;
+                let pesoInputEdit = document.getElementById("pesoInput");
+                pesoInputEdit.focus();
+    
+                pesoInputEdit.addEventListener("keypress", function (event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        let novoValor = parseFloat(pesoInputEdit.value) || 0;
+                        pesoLabel.innerHTML = novoValor.toFixed(3) + " kg";
+                        pesoInput.value = novoValor * 1000;
+                    }
+                });
+    
+                pesoInputEdit.addEventListener("blur", function () {
                     let novoValor = parseFloat(pesoInputEdit.value) || 0;
                     pesoLabel.innerHTML = novoValor.toFixed(3) + " kg";
                     pesoInput.value = novoValor * 1000;
-                }
+                });
             });
-
-            pesoInputEdit.addEventListener("blur", function () {
-                let novoValor = parseFloat(pesoInputEdit.value) || 0;
-                pesoLabel.innerHTML = novoValor.toFixed(3) + " kg";
-                pesoInput.value = novoValor * 1000;
-            });
-        });
-
-        // Adicionar um manipulador de evento de clique aos botões de valores
-        let botoesValores = document.getElementsByClassName("btn-valor");
-        for (let i = 0; i < botoesValores.length; i++) {
-            let botaoValor = botoesValores[i];
-            botaoValor.addEventListener("click", function () {
-                let valor = parseFloat(this.getAttribute("data-valor"));
-                document.getElementById("valor").value = valor.toFixed(2);
-            });
-        }
-    </script>
-
-
+    
+            // Adicionar um manipulador de evento de clique aos botões de valores
+            let botoesValores = document.getElementsByClassName("btn-valor");
+            for (let i = 0; i < botoesValores.length; i++) {
+                let botaoValor = botoesValores[i];
+                botaoValor.addEventListener("click", function () {
+                    let valor = parseFloat(this.getAttribute("data-valor"));
+                    document.getElementById("valor").value = valor.toFixed(2);
+                });
+            }
+        </script>
 </body>
 
 </html>
