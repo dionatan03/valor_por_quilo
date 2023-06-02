@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema</title>
-<style>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sistema</title>
+        <style>
             body {
                 font-family: Arial, sans-serif;
+                background-color: rgb(36, 36, 36);
             }
     
             h1 {
                 text-align: center;
                 margin-top: 50px;
+                color: aliceblue;
             }
     
             form {
@@ -63,7 +64,7 @@
             }
     
             span {
-                color: purple;
+                color: rgb(235, 0, 235);
                 font-weight: 600;
                 font-size: 20px;
                 margin: 10px;
@@ -74,6 +75,7 @@
                 font-size: 18px;
                 font-weight: bold;
                 text-align: center;
+                color: aliceblue;
             }
     
             #botoesValores {
@@ -115,7 +117,7 @@
     
             <label for="valor" style="color: chocolate; margin-bottom: 10px; font-weight: 700;">Valor do produto (em reais
                 por kg):</label>
-            <input autocomplete="off" style="width: 100px; height: 25px;" type="text" id="valor" name="valor">
+            <input autocomplete="off" style="width: 100px; height: 25px; background-color: #d3d3d3;" type="text" id="valor" name="valor">
             <div id="resultado" class="resultado"></div>
             
             <div id="botoesValores">
@@ -213,6 +215,5 @@
                 });
             }
         </script>
-</body>
-
+    </body>
 </html>
